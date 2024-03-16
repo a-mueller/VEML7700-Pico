@@ -1,8 +1,10 @@
+add_library(veml7700 INTERFACE)
 
-include("${PROJECT_SOURCE_DIR}/pico_sdk_import.cmake")
+target_sources(veml7700 INTERFACE
+  ${CMAKE_CURRENT_LIST_DIR}/src/VEML770.cpp
+)
 
-set(SOURCES VEML770.cpp)
+target_include_directories(veml7700 INTERFACE ${CMAKE_CURRENT_LIST_DIR}/src ${CMAKE_CURRENT_LIST_DIR}/include)
 
-add_library(veml7700 ${SOURCES})
-
-target_link_libraries(veml7700 pico_stdlib hardware_i2c)
+# Pull in pico libraries that we need
+target_link_libraries(veml7700 INTERFACE pico_stdlib hardware_i2c)
